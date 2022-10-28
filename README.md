@@ -25,4 +25,24 @@ Each type of Keras layer requires the input with a certain number of dimensions:
 - **1D convolutions and recurrent layers** use `(batch_size, sequence_length, features)`
 - **The shape of other tensors** is computed based on the number of units provided along with other particularities like `kernel_size` in the `Conv2D` layer.
 
-
+1. Using Sequential API  
+```
+from keras.models import Sequential 
+from keras.layers import *  
+model = Sequential()
+model.add(Input(shape=(3,))) # Input tensor    
+model.add(Dense(units=4)) # hidden layer 1 
+model.add(Dense(units=4)) #hidden layer 2  
+model.add(Dense(units=1)) #output layer
+```
+2. Using Functional API
+```
+from keras.models import Model   
+from keras.layers import * 
+inputs = Input(shape=(3,)) # input tensor
+hidden1 = Dense(units=4)(inputs) # hidden layer 1
+hidden2 = Dense(units=4)(hidden1) # hidden layer 2
+outputs = Dense(units=1)(hidden2) # hidden layer 1
+#define the model's start and end points    
+model = Model(inputs, outputs)
+```
